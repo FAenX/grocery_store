@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-1">
+	<div class="row search fixed-top" style="margin-top:50px">
+
+		<div class="col col-md-5 ml-auto mt-3" style="margin-left:864px!important;">
+		</div>
+	</div>
+
+
+	<div class="spacer_search">
+		
+	</div>
+
+
+	<div class="row mt-2 ">
+		{# this is job section #}
+		<div class="col-sm-12 col-md-7">
+			<div class="row">
+				<div class="col-12 bg-dark text-light pt-1 pb-1 text-center">
+					
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col" style="padding:0px;">
+					{% include 'snippets/card.html' with instance=obj %}  
+				</div>
+			</div>
+		</div>
+		{# this is category section #}
+		<div class="col-sm-12 col-md-4  ml-auto sticky-top" >
+				<div class="row " style="width: 23rem;">
+				<div class="col bg-dark text-light text-center " >
+					
+				</div>
+				</div>
+			<div class="row align-items-center " >
+				<div class="col text-center " style="padding:0px;">
+                 <div id="cart"> </div>
+				</div>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+<script src="{% static 'js/cart.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#cart').simpleCart({
+    addtoCartClass: '.sc-add-to-cart',
+    cartProductListClass: '.cart-products-list',
+    totalCartCountClass: '.total-cart-count',
+    totalCartCostClass: '.total-cart-cost',
+    showcartID : '#show-cart',
+    itemCountClass : '.item-count'
+  });
+  $('.cart-checkout').click(function() {
+      var mydata = localStorage.getItem("shoppingCart");
+      
+      console.log(mydata)
+      $.ajax({
+        url: '/cart/api/product-validate/',
+        data:{
+          'mydata': mydata
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_available) {
+            alert('Proceed to checkout');
+          }
+          else {
+              alert(data.error_message)
+          }
+        }
+        
+      
+  })
+  
+});
+})
+</script>
+{% endblock %}

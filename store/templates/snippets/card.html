@@ -1,0 +1,40 @@
+{% for obj in object_list %}
+
+<div class="card mb-3">
+	<div class="card-header">
+		<h4><small>{{ obj.product_name }}</small></h4>
+	</div>
+	<div class="card-body">
+		<div class="d-flex flex-row justify-content-between" style="margin:0;padding:0;">
+			<div class="p-1">
+				
+			</div>
+			<div class="p-1">
+				<h6 class="font_size_h6"><small>AED {{obj.prices.all|first}}</small></h6>
+			</div>
+
+		</div>
+		<div class="card-text">
+			
+			<p class="adjust-font-size">{{ instance.product_description}}</p>
+			<div class="d-flex flex-row justify-content-between">
+				<div class="p-1">
+				</div>
+				<div class="p-1">
+					<button class="btn btn-outline-dark btn-sm mt-4 sc-add-to-cart" data-id={{ obj.id}} data-name={{ obj.product_name }}  data-price={{ obj.prices.all|first}}  type="submit">
+        ADD To Cart
+        </button>
+				</div>
+			</div>
+			
+		</div>
+		<div class="card-footer text-muted d-flex justify-content-between">
+			<div class="p1">
+				<h6 class="text-dark font_size_h6"><small>In stock {{ obj.quantities.all|first }}</small></h6>
+			</div>
+			
+		</div>
+
+	</div>
+</div>
+{% endfor %}
