@@ -16,7 +16,7 @@ def product_validate(request):
     d = {}
     qty=''
     # received data from ajax request
-    rdata = json.loads(request.GET.get('mydata', None))
+    rdata = json.loads(request.GET.get('cartItems', None))
     for da in rdata:
         name = da['name']
         count = da['count']
@@ -54,7 +54,8 @@ def checkout(request):
     process checkout
     reduce items available etc later
     '''
-    items = json.loads(request.GET.get('mydata', None))
+    items = json.loads(request.GET.get('cartItems', None))
     print(items)
+
     data = {'accepted': True}
     return JsonResponse(data)

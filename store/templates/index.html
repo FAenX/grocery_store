@@ -35,13 +35,13 @@ $(document).ready(function () { //initialize shopping cart
     itemCountClass : '.item-count'
   });
   $('.cart-checkout').click(function() {
-      var mydata = localStorage.getItem("shoppingCart"); //click event on checkout
+      var cartItems = localStorage.getItem("shoppingCart"); //click event on checkout
       
-      console.log(mydata)
+      console.log(cartItems)
       $.ajax({
         url: '/cart/api/product-validate/',//validate items on cart
         data:{
-          'mydata': mydata
+          'cartItems': cartItems
         },
         dataType: 'json',
         success: function (data) {
@@ -56,11 +56,11 @@ $(document).ready(function () { //initialize shopping cart
   })  
 });
 function checkout(){
-    var mydata = localStorage.getItem("shoppingCart");
+    var cartItems = localStorage.getItem("shoppingCart");
     $.get({
         url: '/cart/api/checkout/', //checkout cart
         data: {
-            'mydata': mydata
+            'cartItems': cartItems
         },
         dataType: 'json',
         success: function (data){
@@ -72,7 +72,6 @@ function checkout(){
             }
             else {
                 alert('something went wrong');
-                console.log(data.accepted)
                 document.location.reload();
             }
             
