@@ -2,40 +2,18 @@
 {% block content %}
 {% load static %}
 
-<div class="container mt-1">
-	<div class="row search fixed-top" style="margin-top:50px">
-
-		<div class="col col-md-5 ml-auto mt-3" style="margin-left:864px!important;">
-		</div>
-	</div>
-
-
-	<div class="spacer_search">
-		
-	</div>
-
-
+<div class="container">
+	
 	<div class="row mt-2 ">
-		{# this is job section #}
-		<div class="col-sm-12 col-md-7">
-			<div class="row">
-				<div class="col-12 bg-dark text-light pt-1 pb-1 text-center">
-					
-				</div>
-			</div>
-			<div class="row" >
+			{% for obj in object_list %}
 				<div class="col" style="padding:0px;">
 					{% include 'snippets/card.html' with instance=obj %}  
 				</div>
-			</div>
+			{% endfor %}
 		</div>
-		{# this is category section #}
+		{# this is cart section #}
 		<div class="col-sm-12 col-md-4  ml-auto sticky-top" >
-				<div class="row " style="width: 23rem;">
-				<div class="col bg-dark text-light text-center " >
-					
-				</div>
-				</div>
+				
 			<div class="row align-items-center " >
 				<div class="col text-center " style="padding:0px;">
                  <div id="cart"> </div>
@@ -44,10 +22,10 @@
 			</div>
 			
 		</div>
-	</div>
+	
 <script src="{% static 'js/cart.js' %}"></script>
 <script type="text/javascript">
-$(document).ready(function () {
+$(document).ready(function () { //initialize shopping cart
   $('#cart').simpleCart({
     addtoCartClass: '.sc-add-to-cart',
     cartProductListClass: '.cart-products-list',
@@ -57,11 +35,11 @@ $(document).ready(function () {
     itemCountClass : '.item-count'
   });
   $('.cart-checkout').click(function() {
-      var mydata = localStorage.getItem("shoppingCart");
+      var mydata = localStorage.getItem("shoppingCart"); //click event on checkout
       
       console.log(mydata)
       $.ajax({
-        url: '/cart/api/product-validate/',
+        url: '/cart/api/product-validate/',//validate items on cart
         data:{
           'mydata': mydata
         },
@@ -69,16 +47,38 @@ $(document).ready(function () {
         success: function (data) {
           if (data.is_available) {
             alert('Proceed to checkout');
+            checkout();  //checkout  
           }
           else {
               alert(data.error_message)
           }
-        }
-        
-      
-  })
-  
+        }      
+  })  
 });
+function checkout(){
+    var mydata = localStorage.getItem("shoppingCart");
+    $.get({
+        url: '/cart/api/checkout/', //checkout cart
+        data: {
+            'mydata': mydata
+        },
+        dataType: 'json',
+        success: function (data){
+            if (data.accepted){
+            alert('Your Order has been recieved'); 
+            localStorage.removeItem("shoppingCart");
+            window.location.href = "/cart/checkout/success/";    //redirect to success page        
+            
+            }
+            else {
+                alert('something went wrong');
+                console.log(data.accepted)
+                document.location.reload();
+            }
+            
+        }
+    })
+}
 })
 </script>
 {% endblock %}

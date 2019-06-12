@@ -1,7 +1,10 @@
 # units of measurement
-KILOGRAM = 'KG'
+KILOGRAM = 'Kg'
+MILIGRAM = 'Mg'
+
 
 # unit choices
 MEASURING_UNIT_CHOICES = [
     (KILOGRAM, 'kilogram'),
+    (MILIGRAM, 'Miligram')
 ]
