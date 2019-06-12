@@ -54,8 +54,8 @@ def checkout(request):
     process checkout
     reduce items available etc later
     '''
-    items = json.loads(request.GET.get('cartItems', None))
+    items = request.GET.get('items', None)
     print(items)
 
-    data = {'accepted': True}
+    data = {'accepted': 'Recieved'}
     return JsonResponse(data)
