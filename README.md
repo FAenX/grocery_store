@@ -10,11 +10,12 @@ python3.7 and django 2.2 grocery store application
 #### source venv/bin/activate
 
 ### Install requirements
-#### pip3 install -r requirements.py
+#### pip install -r requirements.txt
 
 ### Runserver
 #### python manage.py runserver
 
+# home page
 ### visit 127.0.0.1:8000
 
 ### admin page is on 127.0.0.1:8000/admin/
