@@ -57,8 +57,19 @@ def checkout(request):
     '''
     if request.method == 'POST':
         items = json.loads(request.POST.get('cartItems', None))
+        i = len(items)
+        while i !=0:
+            item = items[0]
+            product = Product.objects.filter(product_name=item['name']).values().get()['id']
+            available_quantity = Quantity.objects.filter(pk=product).values().get()['quantity']
+            new_qty = available_quantity - int(item['count'])
+            qty_obj = Quantity.objects.get(pk=product)
+            qty_obj.quantity = new_qty
+            qty_obj.save()
+            i-=1
+
         print(items)
         data = {'accepted': 'Recieved'}
         return JsonResponse(data)
 
-        
+
