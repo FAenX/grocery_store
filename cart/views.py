@@ -54,5 +54,7 @@ def checkout(request):
     process checkout
     reduce items available etc later
     '''
+    items = json.loads(request.GET.get('mydata', None))
+    print(items)
     data = {'accepted': True}
     return JsonResponse(data)
