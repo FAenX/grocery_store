@@ -40,7 +40,7 @@ class Price(models.Model):
 
     # string representation of the Price
     def __str__(self):
-        return f'{self.price} per {self.unit}'
+        return str(self.price)
 
 class Quantity(models.Model):
     '''
@@ -53,7 +53,7 @@ class Quantity(models.Model):
 
     # string representation of the Quantity
     def __str__(self):
-        return f'{self.quantity} {self.unit}'
+        return str(self.quantity)
 
 #create product slug
 @receiver(pre_save, sender=Product)
