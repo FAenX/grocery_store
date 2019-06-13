@@ -33,7 +33,7 @@ $(document).ready(function () { //initialize shopping cart
     totalCartCostClass: '.total-cart-cost',
     showcartID : '#show-cart',
     itemCountClass : '.item-count'
-  });
+  })
 
 var csrftoken = getCookie('csrftoken');
 function csrfSafeMethod(method) {
@@ -47,7 +47,7 @@ $.ajaxSetup({
           xhr.setRequestHeader("X-CSRFToken", csrftoken);
       }
   }
-});
+})
 
 function getCookie(name) {
   var cookieValue = null;
@@ -68,7 +68,10 @@ function getCookie(name) {
 $('.cart-checkout').click(function() { 
     var cartItems = localStorage.getItem("shoppingCart"); //click event on checkout     
     console.log(cartItems)
-    $.ajax({
+    validate(cartItems)
+})
+function validate(cartItems){
+  $.ajax({
       type: "GET",
       url: '/cart/api/product-validate/',//validate items on cart
       data:{
@@ -78,36 +81,38 @@ $('.cart-checkout').click(function() {
       success: function (data) {
         if (data.is_available) {
           alert('Proceed to checkout');
-          checkout(cartItems);  //checkout  
+          checkout(cartItems);  //checkout 
+          localStorage.removeItem("shoppingCart");
+          document.location.reload();            
         }
         else {
             alert(data.error_message)
         }
       }      
-  })  
-});
+  })
+   
+} 
 function checkout(cartItems){
-    console.log(csrftoken)
-    $.ajax({
-        type: "POST",
-        url: '/cart/api/checkout/', //checkout cart
-        data: {
-            'cartItems': cartItems
+  console.log(csrftoken)
+  $.ajax({
+    type: "POST",
+    url: '/cart/api/checkout/', //checkout cart
+    data: {
+        'cartItems': cartItems
+    },
+    dataType: 'json',
+    success: function (data){            
+        alert(data.accepted); 
+        console.log(cartItems)
+        window.location.href = "/cart/checkout/success/";    //redirect to success page        
         },
-        dataType: 'json',
-        success: function (data){            
-            alert(data.accepted); 
-            console.log(cartItems)
-            localStorage.removeItem("shoppingCart");
-            window.location.href = "/cart/checkout/success/";    //redirect to success page        
-            },
-        error: function() {
-                alert('something went wrong');
-                document.location.reload();
-            },
-            
-        })
-    }
+    error: function() {
+            alert('something went wrong');
+            document.location.reload();
+        },
+        
+    })
+  }
 })
 
 </script>
