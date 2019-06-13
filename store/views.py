@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView 
 
 #app models
-from .models import Product
+from .models import Product, Price
 
 # Create your views here.
 class ProductsListView(ListView):
@@ -10,4 +10,4 @@ class ProductsListView(ListView):
     product list view
     '''
     template_name = 'index.html'
-    model = Product 
+    model = Product
