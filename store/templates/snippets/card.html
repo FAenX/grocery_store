@@ -10,7 +10,7 @@
   <div class="card-body">
     <h4 class="card-title">{{ obj.product_name}}</h4>
     <p class="card-text">{{ obj.product_description|linebreaks|truncatewords:14 }}</p>
-    <p class="card-text">AED {{ obj.prices.all|first }}</p>
+    <p class="card-text">{{ obj.prices.all|first }}</p>
     <p class="card-text">{{obj.quantities.all|first }} Available now </p>
     
     <div class='text-center'>
