@@ -37,10 +37,12 @@ class Price(models.Model):
     unit = models.CharField(_('Unit of measurement'), max_length=5,
                             choices=MEASURING_UNIT_CHOICES, default=KILOGRAM)
     price = models.IntegerField(_('Price per unit'))
+    currency = models.CharField(_('Currency'), max_length=5,
+                            choices=CURRENCIES, default='AED')
 
     # string representation of the Price
     def __str__(self):
-        return str(self.price)
+        return f' {self.currency} {self.price} per {self.unit}'
 
 class Quantity(models.Model):
     '''

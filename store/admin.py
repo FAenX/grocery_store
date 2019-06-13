@@ -12,13 +12,13 @@ class PriceInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['product_name', 'quantity', 'price']
+    list_display = ['product_name', 'quantities', 'price_list']
     inlines = [QuantityInline, PriceInline]
 
-    def quantity(self, product):
-        return product.quantities.all()[0]
-    def price(self, product):
-        return product.prices.all()[0]
+    def quantities(self, product):
+        return [ i for i in product.quantities.all() ]
+    def price_list(self, product):
+        return [ i for i in product.prices.all() ]
 
     
     
