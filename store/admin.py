@@ -16,12 +16,6 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [QuantityInline, PriceInline]
 
     def quantities(self, product):
-        return [ i for i in product.quantities.all() ]
+        return f"{product.quantities.all().values().get()['quantity']} {product.quantities.all().values().get()['unit']}"
     def price_list(self, product):
-        return [ i for i in product.prices.all() ]
-
-    
-    
-    
-
-
+        return f"{product.prices.all().values().get()['currency']}  {product.prices.all().values().get()['price']}"

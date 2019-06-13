@@ -11,12 +11,12 @@
     <h4 class="card-title">{{ obj.product_name}}</h4>
     <p class="card-text">{{ obj.product_description|linebreaks|truncatewords:14 }}</p>
 
-    <p class="card-text">AED {{ obj.prices.all|first }} Per Kg</p>
-    <p class="card-text">{{obj.quantities.all|first }} Available now </p>
+    <p class="card-text">{{ obj.prices.all.values.get.currency}} {{ obj.prices.all.values.get.price }} per {{ obj.prices.all.values.get.unit }}</p>
+    <p class="card-text">{{obj.quantities.all.values.get.quantity}} {{obj.quantities.all.values.get.unit}} Available now </p>
 
     
     <div class='text-center'>
-        <button class="text-center btn btn-outline-dark btn-sm mt-4 sc-add-to-cart" data-id={{ obj.id}} data-name={{ obj.product_name }}  data-price={{ obj.prices.all|first}}  type="submit">Add to cart</button>
+        <button class="text-center btn btn-outline-dark btn-sm mt-4 sc-add-to-cart" data-id={{ obj.id}} data-name={{ obj.product_name }}  data-price={{ obj.prices.all.values.get.price }}  type="submit">Add to cart</button>
     </div>
    
   </div>

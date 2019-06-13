@@ -41,8 +41,8 @@ class Price(models.Model):
                             choices=CURRENCIES, default='AED')
 
     # string representation of the Price
-    def __str__(self):
-        return f'{self.price}'
+    def __repr__(self):
+        return f' {self.currency} {self.price}  {self.unit}'
 
         
 
@@ -56,8 +56,8 @@ class Quantity(models.Model):
     quantity = models.IntegerField(_('Available quantity'))
 
     # string representation of the Quantity
-    def __str__(self):
-        return str(self.quantity)
+    def __repr__(self):
+        return f"{self.quantity} {self.unit}"
 
 #create product slug
 @receiver(pre_save, sender=Product)
