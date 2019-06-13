@@ -19,3 +19,5 @@ python3.7 and django 2.2 grocery store application
 ### visit 127.0.0.1:8000
 
 ### admin page is on 127.0.0.1:8000/admin/
+##### username: admin
+##### password: Admin1234
