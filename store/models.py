@@ -42,7 +42,7 @@ class Price(models.Model):
 
     # string representation of the Price
     def __str__(self):
-        return f' {self.currency} {self.price} per {self.unit}'
+        return f'{self.price}'
 
         
 
