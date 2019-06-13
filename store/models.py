@@ -44,6 +44,8 @@ class Price(models.Model):
     def __str__(self):
         return f' {self.currency} {self.price} per {self.unit}'
 
+        
+
 class Quantity(models.Model):
     '''
     product quantity 
