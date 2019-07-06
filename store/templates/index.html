@@ -12,11 +12,11 @@
 			{% endfor %}
 		</div>
 		{# this is cart section #}
-		<div class="col-sm-12 col-md-4  ml-auto sticky-top" >
+		<div >
 				
-			<div class="row align-items-center " >
-				<div class="col text-center " style="padding:0px;">
-                 <div id="cart"> </div>
+			<div class="align-items-center " >
+				<div class="text-center " style="padding:0px;">
+                 <div id="cart" style="display: none; width: 500px; height: 500px;"> </div>
 				</div>
 			</div>
 			</div>
@@ -34,6 +34,10 @@ $(document).ready(function () { //initialize shopping cart
     showcartID : '#show-cart',
     itemCountClass : '.item-count'
   })
+$("#cart_button").click(function(){
+  $("#cart").toggle();
+})
+
 
 var csrftoken = getCookie('csrftoken');
 function csrfSafeMethod(method) {
