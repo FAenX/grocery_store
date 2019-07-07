@@ -10,13 +10,13 @@
 					{% include 'snippets/card.html' with instance=obj %}  
 				</div>
 			{% endfor %}
-		</div>
+    </div>
+    
 		{# this is cart section #}
-		<div >
-				
+		<div class="container">				
 			<div class="align-items-center " >
 				<div class="text-center " style="padding:0px;">
-          <div id="cart" style="display: none; width: 500px; height: 500px;"> </div>
+          <div class="modal" id="cart"> </div>
 				</div>
 			</div>
 			</div>
@@ -35,8 +35,17 @@ $(document).ready(function () { //initialize shopping cart
     itemCountClass : '.item-count',
     itemCountID : '#itemCount'
   })
-$("#cart_button").click(function(){
-  $("#cart").toggle();
+
+$("#cart_button").click(function($navigation, $MQ){
+  $("#cart") 
+   if ( $(window).width() >= $MQ ) {
+      $navigation.detach();
+      $navigation.appendTo('header');
+   } else {
+      $navigation.detach();
+      $navigation.insertAfter('header');
+   }
+
 })
 
 

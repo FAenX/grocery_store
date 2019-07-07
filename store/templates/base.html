@@ -16,7 +16,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     
- 
+  <!-- jQuery Modal -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -34,9 +36,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent"> </div>
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <p id="cart_button">
+      <p>
         <span id="itemCount"></span>
-        <img src="{% static 'images/cart.png' %}" width="30" height="30">
+        <a href="#cart" rel="modal:open"><img src="{% static 'images/cart.png' %}" width="30" height="30"></a>
       </p>
     </li>
   </ul>
