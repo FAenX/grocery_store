@@ -8,7 +8,8 @@
       totalCartCountClass: '.total-cart-count',
       totalCartCostClass: '.total-cart-cost',
       showcartID : '#show-cart',
-      itemCountClass : '.item-count'
+      itemCountClass : '.item-count',
+      itemCountID : '#itemCount'
   };
 
   function Item(name, price, count) {
@@ -63,6 +64,7 @@
           $(this.options.cartProductListClass).html(mi._displayCart());
           $(this.options.totalCartCountClass).html(mi._totalCartCount() + " items");
           $(this.options.totalCartCostClass).html(mi._totalCartCost());
+          $(this.options.itemCountID).html(mi._totalCartCount());
       },
       _setCartbuttons: function () {
 
@@ -75,18 +77,20 @@
               var cost = Number($(this).attr("data-price"));
               mi._addItemToCart(name, cost, 1);
               mi._updateCartDetails();
+              
           });
 
           $(this.options.showcartID).on("change", this.options.itemCountClass, function (e) {
-              var ci = this;
-      e.preventDefault();
-      var count = $(this).val();
-      var name = $(this).attr("data-name");
-      var cost = Number($(this).attr("data-price"));
-      var id = Number($(this).attr("data-id"));
-      mi._removeItemfromCart(name, cost, count);
-      mi._updateCartDetails();
-  });
+            var ci = this;
+            e.preventDefault();
+            var count = $(this).val();
+            var name = $(this).attr("data-name");
+            var cost = Number($(this).attr("data-price"));
+            var id = Number($(this).attr("data-id"));
+            mi._removeItemfromCart(name, cost, count);
+            mi._updateCartDetails();
+        });
+        
 
       },
       /* Helper Functions */
@@ -102,6 +106,7 @@
           var item = new Item(name, price, count);
           this.cart.push(item);
           this._saveCart();
+          
       },
       _removeItemfromCart: function (name, price, count) {
           for (var i in this.cart) {
@@ -161,12 +166,7 @@
           }
           return cartCopy;
       },
-      _calGST: function () {
-          var GSTPercent = 18;
-          var totalcost = this.totalCartCost();
-          var calGST = Number((totalcost * GSTPercent) / 100);
-          return calGST;
-      },
+      
       _saveCart: function () {
           localStorage.setItem("shoppingCart", JSON.stringify(this.cart));
       },

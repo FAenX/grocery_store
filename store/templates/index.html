@@ -16,7 +16,7 @@
 				
 			<div class="align-items-center " >
 				<div class="text-center " style="padding:0px;">
-                 <div id="cart" style="display: none; width: 500px; height: 500px;"> </div>
+          <div id="cart" style="display: none; width: 500px; height: 500px;"> </div>
 				</div>
 			</div>
 			</div>
@@ -32,7 +32,8 @@ $(document).ready(function () { //initialize shopping cart
     totalCartCountClass: '.total-cart-count',
     totalCartCostClass: '.total-cart-cost',
     showcartID : '#show-cart',
-    itemCountClass : '.item-count'
+    itemCountClass : '.item-count',
+    itemCountID : '#itemCount'
   })
 $("#cart_button").click(function(){
   $("#cart").toggle();
@@ -68,12 +69,13 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-  
+
 $('.cart-checkout').click(function() { 
     var cartItems = localStorage.getItem("shoppingCart"); //click event on checkout     
     console.log(cartItems)
     validate(cartItems)
 })
+
 function validate(cartItems){
   $.ajax({
       type: "GET",
