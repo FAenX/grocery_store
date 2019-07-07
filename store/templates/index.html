@@ -36,19 +36,6 @@ $(document).ready(function () { //initialize shopping cart
     itemCountID : '#itemCount'
   })
 
-$("#cart_button").click(function($navigation, $MQ){
-  $("#cart") 
-   if ( $(window).width() >= $MQ ) {
-      $navigation.detach();
-      $navigation.appendTo('header');
-   } else {
-      $navigation.detach();
-      $navigation.insertAfter('header');
-   }
-
-})
-
-
 var csrftoken = getCookie('csrftoken');
 function csrfSafeMethod(method) {
   // these HTTP methods do not require CSRF protection
